@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravaclothing</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- SVG FRAME FIJO -->
+  <div id="svg-frame-layer">
+    <img src="media/Recurso 2-11.svg" id="svg-frame">
+  </div>
+  <canvas id="output"></canvas>
+  <canvas id="finalCanvas"></canvas>
+  <canvas id="distortCanvas"></canvas>
+  <!-- CRT 80s (final output) -->
+  <canvas id="crt80s"></canvas>
+  <!-- HIDDEN CANVAS TO ASSEMBLE CAROUSEL TEXTURE -->
+  <canvas id="carousel-buffer"></canvas>
+
+  <div class="noise-layer" aria-hidden="true"></div>
+  <div class="text-contrast-layer" aria-hidden="true"></div>
+
+  <a class="top-logo" href="index.html" aria-label="Ir al inicio">
+    <img src="media/Recurso 10-11.png" alt="">
+  </a>
+
+  <div class="menu-overlay" aria-label="Menú">
+    <div class="menu-left">
+      <a class="menu-link" href="shop.html">SHOP</a>
+      <a class="menu-link" href="viewall.html">VIEW ALL</a>
+      <img class="menu-thumb" src="media/Recurso 1-11.png" alt="" aria-hidden="true">
+    </div>
+    <a class="menu-link menu-lookbook" href="lookbook.html">LOOKBOOK</a>
+  </div>
+
+  <!-- CARRUSEL HTML (solo para scroll) -->
+  <div id="carousel">
+    <div class="slide"><img src="media/000014-2 1.jpg"></div>
+    <div class="slide">
+      <video id="carousel-video" src="media/carousel.mp4" muted autoplay loop playsinline preload="auto"></video>
+    </div>
+    <div class="slide"><img src="media/000019 1 1.jpg"></div>
+  </div>
+    <script src="script.js"></script>
+</body>
+</html>

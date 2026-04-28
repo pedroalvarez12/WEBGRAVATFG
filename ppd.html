@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPD</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-ppd">
+  <a class="top-logo" href="index.html" aria-label="Ir al inicio">
+    <img src="media/Recurso 10-11.png" alt="">
+  </a>
+
+  <main class="ppd-layout" aria-label="Producto">
+    <div class="ppd-container">
+      <section class="ppd-panel" aria-label="Producto">
+        <div class="ppd-gallery" aria-label="Fotos">
+          <div class="ppd-grid" data-ppd-grid></div>
+        </div>
+
+        <aside class="ppd-info" aria-label="Información">
+          <h1 class="ppd-title" data-ppd-title>SPLIT ZIP JACKET BLUE</h1>
+          <div class="ppd-price" data-ppd-price>€99,00</div>
+
+          <p class="ppd-description" data-ppd-description>Chaqueta con cremallera, corte regular y acabado premium. Tejido suave y resistente.</p>
+
+          <div class="ppd-section" aria-label="Tallas">
+            <div class="ppd-section-title">SIZE</div>
+            <div class="ppd-sizes" role="list">
+              <button class="ppd-size" type="button" role="listitem">XS</button>
+              <button class="ppd-size" type="button" role="listitem">S</button>
+              <button class="ppd-size" type="button" role="listitem">M</button>
+              <button class="ppd-size" type="button" role="listitem">L</button>
+              <button class="ppd-size" type="button" role="listitem">XL</button>
+            </div>
+          </div>
+
+          <div class="ppd-actions" aria-label="Acciones">
+            <button class="ppd-btn ppd-btn-outline" type="button">ADD TO CART</button>
+            <button class="ppd-btn ppd-btn-solid" type="button">BUY NOW</button>
+          </div>
+
+          <details class="ppd-accordion">
+            <summary>PAYMENT METHODS</summary>
+            <div class="ppd-accordion-body">
+              <div class="ppd-accordion-row">Visa / Mastercard</div>
+              <div class="ppd-accordion-row">PayPal</div>
+              <div class="ppd-accordion-row">Apple Pay</div>
+            </div>
+          </details>
+
+          <details class="ppd-accordion">
+            <summary>HOW TO WASH</summary>
+            <div class="ppd-accordion-body">
+              <div class="ppd-accordion-row">Lavar a 30ºC</div>
+              <div class="ppd-accordion-row">No usar lejía</div>
+              <div class="ppd-accordion-row">Planchar del revés</div>
+            </div>
+          </details>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <div class="menu-overlay menu-overlay-dark" aria-label="Menú">
+    <div class="menu-left">
+      <a class="menu-link" href="shop.html">SHOP</a>
+      <a class="menu-link" href="viewall.html">VIEW ALL</a>
+      <img class="menu-thumb" src="media/Recurso 2-11.png" alt="" aria-hidden="true">
+    </div>
+    <a class="menu-link menu-lookbook" href="lookbook.html">LOOKBOOK</a>
+  </div>
+
+  <script>
+    (() => {
+      const buildImages = (slug) => {
+        const out = [];
+        for (let i = 1; i <= 8; i += 1) {
+          out.push(`media/products/${slug}/${String(i).padStart(2, "0")}.jpg`);
+        }
+        return out;
+      };
+
+      const fallbackImages = ["media/000014-2 1.jpg", "media/000016 1.jpg", "media/000019 1 1.jpg"];
+
+      const products = {
+        "leopard-zip-hoodie": {
+          title: "Leopard zip hoodie",
+          price: "€69,00",
+          description: "Hoodie con cremallera y fit relajado. Interior suave y detalles cuidados.",
+          images: buildImages("leopard-zip-hoodie")
+        },
+        "bling-bling-tee": {
+          title: "Bling bling tee",
+          price: "€35,00",
+          description: "Camiseta con corte regular y tejido suave. Detalle gráfico y acabado premium.",
+          images: buildImages("bling-bling-tee")
+        },
+        "essential-zip-hoodie": {
+          title: "Essential zip hoodie",
+          price: "€69,00",
+          description: "Hoodie esencial con cremallera. Diseño limpio y comodidad diaria.",
+          images: buildImages("essential-zip-hoodie")
+        },
+        "essential-pants": {
+          title: "Essential pants",
+          price: "€75,00",
+          description: "Pantalón esencial con acabado premium y caída cómoda. Versátil para diario.",
+          images: buildImages("essential-pants")
+        },
+        "silver-dog-tee": {
+          title: "Silver dog tee",
+          price: "€35,00",
+          description: "Camiseta con corte regular y tejido suave. Estampado frontal y acabado premium.",
+          images: buildImages("silver-dog-tee")
+        },
+        "curved-president-tee": {
+          title: "Curved president tee",
+          price: "€35,00",
+          description: "Camiseta con fit cómodo y tejido suave. Gráfico curvado en el frontal.",
+          images: buildImages("curved-president-tee")
+        },
+        "g-tank-top": {
+          title: "G tank top",
+          price: "€35,00",
+          description: "Tank top ligero con corte limpio. Ideal para layering.",
+          images: buildImages("g-tank-top")
+        },
+        "grava-denim-pants": {
+          title: "Grava denim pants",
+          price: "€75,00",
+          description: "Pantalón denim con construcción sólida y ajuste cómodo. Detalles cuidados.",
+          images: buildImages("grava-denim-pants")
+        },
+        "red-script-balaclava": {
+          title: "Red script balaclava",
+          price: "€25,00",
+          description: "Balaclava con bordado script. Tejido cálido y ajuste cómodo.",
+          images: buildImages("red-script-balaclava")
+        },
+        "black-script-balaclava": {
+          title: "Black script balaclava",
+          price: "€25,00",
+          description: "Balaclava con bordado script. Tejido cálido y ajuste cómodo.",
+          images: buildImages("black-script-balaclava")
+        }
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const key = params.get("p") || "leopard-zip-hoodie";
+      const product = products[key] || products["leopard-zip-hoodie"];
+
+      const formatTitle = (value) => {
+        const trimmed = String(value || "").trim();
+        if (!trimmed) return "";
+        const lower = trimmed.toLowerCase();
+        return lower[0].toUpperCase() + lower.slice(1);
+      };
+
+      const titleEl = document.querySelector("[data-ppd-title]");
+      const priceEl = document.querySelector("[data-ppd-price]");
+      const descEl = document.querySelector("[data-ppd-description]");
+      const gridEl = document.querySelector("[data-ppd-grid]");
+
+      const formattedTitle = formatTitle(product.title);
+      if (titleEl) titleEl.textContent = formattedTitle;
+      if (priceEl) priceEl.textContent = product.price;
+      if (descEl) descEl.textContent = product.description;
+      if (document.title) document.title = formattedTitle;
+
+      if (gridEl) {
+        gridEl.innerHTML = "";
+        for (let i = 0; i < product.images.length; i += 1) {
+          const src = product.images[i];
+          const wrapper = document.createElement("div");
+          wrapper.className = "ppd-media";
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = "";
+          img.loading = "lazy";
+          img.addEventListener("error", () => {
+            img.src = fallbackImages[i % fallbackImages.length];
+          }, { once: true });
+          wrapper.appendChild(img);
+          gridEl.appendChild(wrapper);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
