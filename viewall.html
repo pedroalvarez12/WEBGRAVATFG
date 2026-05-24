@@ -14,7 +14,7 @@
   <main class="viewall-layout" aria-label="View all">
     <div class="viewall-container">
       <section class="viewall-hero" aria-hidden="true">
-        <img class="viewall-hero-img" src="media/000016 1.jpg" alt="">
+        <img class="viewall-hero-img" src="media/22.png" alt="">
       </section>
 
       <section class="viewall-grid" aria-label="Productos">
@@ -115,14 +115,14 @@
       <section class="shop-your-look" aria-label="Shop your look">
         <h2 class="shop-your-look-title">SHOP YOUR LOOK</h2>
         <div class="look-row" aria-hidden="true">
-          <a class="look-item" href="shop.html"><img src="media/000014-2 1.jpg" alt=""></a>
-          <a class="look-item" href="shop.html"><img src="media/000016 1.jpg" alt=""></a>
-          <a class="look-item" href="shop.html"><img src="media/000019 1 1.jpg" alt=""></a>
-          <a class="look-item" href="shop.html"><img src="media/000014-2 1.jpg" alt=""></a>
-          <a class="look-item" href="shop.html"><img src="media/000016 1.jpg" alt=""></a>
-          <a class="look-item" href="shop.html"><img src="media/000019 1 1.jpg" alt=""></a>
-          <a class="look-item" href="shop.html"><img src="media/000014-2 1.jpg" alt=""></a>
-          <a class="look-item" href="shop.html"><img src="media/000016 1.jpg" alt=""></a>
+          <a class="look-item" href="shop.html"><img src="media/01.JPG" alt=""></a>
+          <a class="look-item" href="shop.html"><img src="media/02.JPG" alt=""></a>
+          <a class="look-item" href="shop.html"><img src="media/03.jpeg" alt=""></a>
+          <a class="look-item" href="shop.html"><img src="media/04.JPG" alt=""></a>
+          <a class="look-item" href="shop.html"><img src="media/05.jpeg" alt=""></a>
+          <a class="look-item" href="shop.html"><img src="media/06.JPG" alt=""></a>
+          <a class="look-item" href="shop.html"><img src="media/07.JPG" alt=""></a>
+          <a class="look-item" href="shop.html"><img src="media/08.JPG" alt=""></a>
         </div>
       </section>
     </div>
@@ -147,8 +147,6 @@
         return out;
       };
 
-      const fallbackSrc = "media/000014-2 1.jpg";
-
       const cards = document.querySelectorAll("[data-viewall-card]");
       for (const card of cards) {
         const slug = card.dataset.slug;
@@ -168,7 +166,13 @@
         };
 
         img.addEventListener("error", () => {
-          img.src = fallbackSrc;
+          // Si la imagen falla, intentamos cargar la primera si no es la que ya falló
+          if (index !== 0) {
+            setIndex(0);
+          } else {
+            // Si incluso la primera falla, ocultamos la imagen del producto
+            img.style.display = "none";
+          }
         });
 
         prev.addEventListener("click", (e) => {

@@ -6,28 +6,38 @@ window.addEventListener("mousemove", (e) => {
 });
 
 /*******************************************************
- * LOAD IMAGES → ATLAS TEXTURE
+ * LOAD ASSETS → ATLAS TEXTURE
  *******************************************************/
-const imageSources = [
-  "media/000014-2 1.jpg",
-  "media/000016 1.jpg",
-  "media/000019 1 1.jpg"
-];
-
-let images = [];
-let loaded = 0;
-let videoEl = null;
-let hasVideo = false;
-
-imageSources.forEach((src, i) => {
-  let img = new Image();
-  img.src = src;
-  img.onload = () => {
-    images[i] = img;
-    loaded++;
-    if (loaded === imageSources.length) initCRT();
+const slidesHTML = Array.from(document.querySelectorAll("#carousel .slide"));
+const slideAssets = slidesHTML.map(slide => {
+  const img = slide.querySelector("img");
+  const video = slide.querySelector("video");
+  return {
+    type: img ? "image" : "video",
+    src: img ? img.src : (video ? video.src : null),
+    el: img || video
   };
 });
+
+let loadedImages = 0;
+const totalImages = slideAssets.filter(a => a.type === "image").length;
+
+slideAssets.forEach((asset) => {
+  if (asset.type === "image") {
+    const img = new Image();
+    img.src = asset.src;
+    img.onload = () => {
+      asset.el = img;
+      loadedImages++;
+      if (loadedImages === totalImages) initCRT();
+    };
+  }
+});
+
+// En caso de que no haya imágenes (solo video), inicializar directamente
+if (totalImages === 0) {
+  window.addEventListener("DOMContentLoaded", initCRT);
+}
 
 window.addEventListener("DOMContentLoaded", () => {
   videoEl = document.getElementById("carousel-video");
@@ -36,16 +46,9 @@ window.addEventListener("DOMContentLoaded", () => {
   videoEl.loop = true;
   videoEl.autoplay = true;
   videoEl.playsInline = true;
-  videoEl.addEventListener("ended", () => {
-    videoEl.currentTime = 0;
-    videoEl.play().catch(() => {});
-  });
   videoEl.addEventListener("canplay", () => {
     hasVideo = true;
     videoEl.play().catch(() => {});
-  });
-  videoEl.addEventListener("error", () => {
-    hasVideo = false;
   });
 });
 
@@ -198,22 +201,33 @@ function initCRT() {
 
 
   /*******************************************************
-   * BUILD ATLAS TEXTURE (3 images stacked vertically)
+   * BUILD ATLAS TEXTURE
    *******************************************************/
   const buffer = document.getElementById("carousel-buffer");
   const ctx = buffer.getContext("2d");
 
-  buffer.width = images[0].width;
-  buffer.height = images[0].height * imageSources.length;
+  // Buscamos la primera imagen cargada para determinar el tamaño de referencia
+  const firstImg = slideAssets.find(a => a.type === "image")?.el;
+  const slideW = firstImg ? firstImg.width : 1920;
+  const slideH = firstImg ? firstImg.height : 1080;
 
-  const slideW = images[0].width;
-  const slideH = images[0].height;
+  buffer.width = slideW;
+  buffer.height = slideH * slideAssets.length;
 
   const drawAtlas = () => {
-    ctx.drawImage(images[0], 0, 0, slideW, slideH);
-    if (videoEl && hasVideo && videoEl.readyState >= 2) ctx.drawImage(videoEl, 0, slideH, slideW, slideH);
-    else ctx.drawImage(images[1], 0, slideH, slideW, slideH);
-    ctx.drawImage(images[2], 0, slideH * 2, slideW, slideH);
+    slideAssets.forEach((asset, i) => {
+      if (asset.type === "video") {
+        const v = asset.el;
+        if (v && v.readyState >= 2) {
+          ctx.drawImage(v, 0, slideH * i, slideW, slideH);
+        } else {
+          ctx.fillStyle = "#000";
+          ctx.fillRect(0, slideH * i, slideW, slideH);
+        }
+      } else {
+        ctx.drawImage(asset.el, 0, slideH * i, slideW, slideH);
+      }
+    });
   };
 
   drawAtlas();
@@ -285,7 +299,7 @@ function initCRT() {
     }
 
     void main(){
-      float total = float(${imageSources.length});
+      float total = float(${slideAssets.length});
       float scale = 1.0 / total;
       float offset = slide * scale;
 

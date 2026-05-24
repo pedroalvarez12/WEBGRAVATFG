@@ -81,8 +81,6 @@
         return out;
       };
 
-      const fallbackImages = ["media/000014-2 1.jpg", "media/000016 1.jpg", "media/000019 1 1.jpg"];
-
       const products = {
         "leopard-zip-hoodie": {
           title: "Leopard zip hoodie",
@@ -179,7 +177,7 @@
           img.alt = "";
           img.loading = "lazy";
           img.addEventListener("error", () => {
-            img.src = fallbackImages[i % fallbackImages.length];
+            wrapper.remove(); // Si la imagen no existe, eliminamos el contenedor
           }, { once: true });
           wrapper.appendChild(img);
           gridEl.appendChild(wrapper);
